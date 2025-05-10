@@ -1,0 +1,13 @@
+from pytz import timezone
+from datetime import datetime
+
+# Convert UTC to CST
+utc = timezone("UTC")
+cst = timezone("US/Central")
+
+# Parse partition_date in UTC, then convert to CST
+utc_dt = utc.localize(datetime.strptime(partition_date, "%Y%m%d"))
+cst_dt = utc_dt.astimezone(cst)
+
+# Format to YYYY-MM-DD string
+load_date = cst_dt.strftime("%Y-%m-%d")
